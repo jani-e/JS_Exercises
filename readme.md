@@ -1,1 +1,1 @@
-Javascript exercises.
+Javascript exercises
