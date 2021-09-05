@@ -1,3 +1,3 @@
 Javascript exercises
 
-test1
+test
