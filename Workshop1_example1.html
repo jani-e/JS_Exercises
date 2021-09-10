@@ -5,46 +5,9 @@
 		<title>Workshop 1</title>
 		<!-- script tag is where Javascript goes to -->
 		<script>
-			//alert("Hello World"); //annoying alert off
-			for(var i = 0; i < 20; i++) { //reduced from 400 to 20
+			for(var i = 0; i < 400; i++) {
 				console.log("This round is " + i);
 			}
-
-			var x = 50;
-			var order = "Beer";
-			if (x < 50) {
-    			document.write("<h1>He's over 50!</h1>");
-			} else if (x <= 50 && x > 30){
-    			document.write("<strong>Middle aged man, who ordered some </strong" + order);
-			} else
-    			document.write("It seems you're a bit underaged.");
-
-			//loops
-
-			var arr = [];
-			for (var i=0; i<15; i++) {
-				arr.push( Math.random() );
-			}
-			console.log(arr);
-			
-			for (var i = 0; i<15; i++){ //Output the values generated to the console as they are created
-    			console.log(Math.random());
-			}
-			
-			var arr2 = [];
-			for (var i=0; i<15; i++) { //Output the values using document.write, using HTML-tags to format them
-				arr2.push( Math.random() );
-			}
-			document.write(arr2);
-
-			var arr3 = [];
-			for (var i=0; i<15; i++) {
-				arr3.push(Math.floor(Math.random() * 100)+1); //Randomize numers between 1-100
-			}
-			console.log(arr3);
-
-
-
 		</script>
 
 	</head>
