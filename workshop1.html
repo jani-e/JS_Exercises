@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshop1</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<h1>Workshop1</h1>
+
+<script>
+// 3.Conditionals
+document.write("<h2>Conditionals</h2>");
+var x = 31;
+var order = "Beer";
+
+if (x > 50) {
+    document.write("<h2>He's over 50!</h2>");
+    alert("He's over 50!");
+} else if (x <= 50 && x > 30) {
+    document.write("<strong>Middle aged man, who ordered some " + order + "</strong>");
+    console.log("Middle aged ordered some " + order);
+} else if (x <= 30 && x >= 18) {
+    document.write("<h3>You barely made it. Have a " + order + "</h3>");
+} else
+    document.write("<i>It seems you're a bit underaged.</i>");
+
+// 4 loops
+document.write("<h2>Loops</h2><ol>");
+var arr = [];
+for (var i=0; i<15; i++) {
+    arr.push(Math.floor(Math.random() * 100) + 1);
+    console.log(arr[i]);
+    document.write('<li>' + arr[i] + '</li>');
+}
+console.log(arr);
+document.write("</ol>");
+
+// 5 functions
+document.write("<h2>Functions</h2>");
+
+// 6 Objects
+document.write("<h2>Objects</h2>");
+
+// independent exercises
+document.write("<h2>Independent exercises</h2>");
+</script>
+
+</body>
+</html>
