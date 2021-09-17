@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta charset="UTF-8">
+		<title>Move Block</title>
+		<style>
+			#square {
+				background-color: blue;
+				width: 20px;
+				height: 20px;
+				margin-left: 100px;
+				margin-top: 100px;
+			}
+		</style>
+	</head>
+	<body onkeydown="myFunction(event)"> <!--when any key is pressed on the document-->
+
+		<p>Press arrow-keys on the keyboard to move the square.</p>
+		<p id="pressedKey">The pressed key was: Null</p>
+		<div id="square"></div>
+		<script>
+		
+		var vertical = 100;
+		var horizontal = 100;
+
+		function moveUp(event) {
+			vertical -= 10;
+			document.getElementById("square").style.marginTop=vertical+"px";
+			console.log(vertical);
+		}
+
+		function moveDown(event) {
+			vertical += 10;
+			document.getElementById("square").style.marginTop=vertical+"px";
+			console.log(vertical);
+		}
+		function moveLeft(event) {
+			horizontal -= 10;
+			document.getElementById("square").style.marginLeft=horizontal+"px";
+			console.log(horizontal);
+		}
+
+		function moveRight(event) {
+			horizontal += 10;
+			document.getElementById("square").style.marginLeft=horizontal+"px";
+			console.log(horizontal);
+		}
+
+		function myFunction(event) { //listen which arrow key is pressed + activate related function
+			var x = event.key;
+			if (x == "ArrowUp") {
+			moveUp(event);
+			document.getElementById("pressedKey").innerHTML = "The pressed key was: " + x;
+			}
+			if (x == "ArrowDown") {
+			moveDown(event);
+			document.getElementById("pressedKey").innerHTML = "The pressed key was: " + x;
+			}
+			if (x == "ArrowRight") {
+			moveRight(event);
+			document.getElementById("pressedKey").innerHTML = "The pressed key was: " + x;
+			}
+			if (x == "ArrowLeft") {
+			moveLeft(event);
+			document.getElementById("pressedKey").innerHTML = "The pressed key was: " + x;
+			}
+		}
+		</script>
+	</body>
+</html>
