@@ -6,6 +6,45 @@
         <link rel="stylesheet" href="css/styles.css">
         <script>
             <!-- JavaScript goes here -->
+            function showTable1() { //extra code
+                var hideTable = document.getElementById("example");
+                if (hideTable.style.display === "none") {
+                    hideTable.style.display = "block";
+                } else {
+                    hideTable.style.display = "none";
+                }
+            }
+            function showTable2() {
+                var magicalTable = `
+                <table id="example" class="display"> 
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Animal</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pablo</td>
+                            <td>Panda</td>
+                            <td>China</td>
+                        </tr>
+                        <tr>
+                            <td>Theo</td>
+                            <td>Ferret</td>
+                            <td>Finland</td>
+                        </tr>
+                        <tr>
+                            <td>Karen</td>
+                            <td>Human</td>
+                            <td>United States of America</td>
+                        </tr>            
+                    </tbody>
+                </table>
+                `;
+                document.write(magicalTable)
+            }
         </script>
     </head>
     <body class="ws3">
@@ -16,17 +55,20 @@
         <h2>Exercise 1</h2>
         <p>Below you will see three buttons. Edit the source code and add an onClick-events to these buttons.</p>
         <p>
-          <button>Click me</button>
-          <button>Show table</button>
+          <button onclick="alert('You clicked me!\n' + new Date())">Click me</button> <!--Using just Date() brings out the toString method of Date(), in this case, the result is the same-->
+          <button onclick="showTable1()">Show/hide table below</button> <!--extra, not asked in the workshop-->
+          <button onclick="showTable2()">Show table</button>
           <button>Geolocation</button>
         </p>
 
         <ol>
-          <li>The first button should open an alert-button, which will say "You clicked me!" </li>
-          <li> When you see the button working, add the current date after the text by using the Date() -function.</li>
-          <li>The second button should call a function called showTable()". ShowTable function should output a simple HTML-table (below) to the page. Use document.write to print data. Feel free to modify the data on the table.</li>
+          <li><strong>COMPLETE</strong> - The first button should open an alert-button, which will say "You clicked me!" </li>
+          <li><strong>COMPLETE</strong> - When you see the button working, add the current date after the text by using the Date() -function.</li>
+          <li><strong>COMPLETE+</strong> - The second button should call a function called showTable()". ShowTable function should output a simple HTML-table (below) to the page. Use document.write to print data. Feel free to modify the data on the table.</li>
         </ol>
-        <table id="example" class="display">
+        </table>
+        <!--table below: style has to be here for display:none, doesn't work in meta or external css because js returns null style value the first time it is clicked-->
+        <table id="example" class="display" style="display:none"> 
             <thead>
                 <tr>
                     <th>Name</th>
