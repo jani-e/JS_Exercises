@@ -45,6 +45,68 @@
                 `;
                 document.write(magicalTable)
             }
+            var geofield = document.getElementById("geo");
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+            
+            function success(pos) {
+                console.log('Your current position is: ' + pos.coords.latitude + ' latitude, ' + pos.coords.longitude + ' longitude.');
+                document.getElementById("geo").innerHTML = ('Your current position is: ' + pos.coords.latitude + ' latitude, ' + pos.coords.longitude + ' longitude.');
+            }
+            function error(err) {
+                console.warn('brrbrr: ' + err.code + ' ' + err.message);
+            }
+            function printGeolocation() {
+                navigator.geolocation.getCurrentPosition(success, error, options);
+                
+            }
+
+            //Exercise 2
+
+            function onFire() {
+                console.log("Stepped over my a mouse!");
+            }
+            function leaveFire() {
+                console.log("Bye bye mouse!");
+            }
+
+            //Exercise 3
+
+            function changeTextarea() {
+                var box = document.getElementById("textdata");
+                box.innerHTML = ("Please fill in the form with proper data.");
+                //also box.value = ("works as well");
+                box.style.backgroundColor = "red";
+            }
+
+            var counter = 0;
+            function keypressCounter() {
+                counter++;
+                document.getElementById("charcount").innerHTML = (counter + " keypresses");
+            }
+
+            function validateEmpty() {
+                var textbox = document.getElementById("textdata").value;
+                if (textbox == "") {
+                    alert("Textarea is empty.");
+                    return false; //is this necessary?
+                }
+            }
+
+            //exercise 4
+
+            function mouseEvent(event) {
+                var x = event.clientX;
+                var y = event.clientY;
+                var mouseCoords = "Mouse coordinates: x:" + x + " y: " + y;
+                document.getElementById("coordinates").innerHTML = mouseCoords;
+                document.getElementById("coords").innerHTML = mouseCoords;
+                console.log(mouseCoords);
+            }
+
         </script>
     </head>
     <body class="ws3">
@@ -58,7 +120,7 @@
           <button onclick="alert('You clicked me!\n' + new Date())">Click me</button> <!--Using just Date() brings out the toString method of Date(), in this case, the result is the same-->
           <button onclick="showTable1()">Show/hide table below</button> <!--extra, not asked in the workshop-->
           <button onclick="showTable2()">Show table</button>
-          <button>Geolocation</button>
+          <button onclick="printGeolocation()">Geolocation</button>
         </p>
 
         <ol>
@@ -105,33 +167,34 @@
             </tbody>
         </table>
         <ol start="4">
-            <li>The last button should check Geolocation of the user, and output it to the console and to the page. Note: Some browsers might not allow you to do this. Try different browsers if you get errors.</li>
+            <li><strong>COMPLETE</strong> - The last button should check Geolocation of the user, and output it to the console and to the page. Note: Some browsers might not allow you to do this. Try different browsers if you get errors.</li>
         </ol>
+        <p id="geo"></p>
         <hr/>
-        <h2>Exercise 2</h2>
+        <h2 onmouseover="onFire()" onmouseleave="leaveFire()">Exercise 2</h2>
         <ul>
-            <li>Add an&nbsp;onMouseOver event on the&nbsp;Heading "Exercise 2" of this page.&nbsp;It should&nbsp;fire when the users mouse is moved 
+            <li><strong>COMPLETE</strong> - Add an&nbsp;onMouseOver event on the&nbsp;Heading "Exercise 2" of this page.&nbsp;It should&nbsp;fire when the users mouse is moved 
         over&nbsp;it. Output "Stepped over my a mouse!" on the console.</li>
-            <li>Add another event, which will fire then the mouse leaves the Exercise 2 -heading. This time show an alert window to the user saying: "Bye bye mouse!"</li>
+            <li><strong>COMPLETE</strong> - Add another event, which will fire then the mouse leaves the Exercise 2 -heading. This time show an alert window to the user saying: "Bye bye mouse!"</li>
         </ul>
         <hr/>
         <h2>Exercise 3</h2>
         <p>Below you will see a simple form.</p>
         <ul>
-          <li>Add onfocus -event to the&nbsp;textarea below. When the user enters the textarea, it should show a text saying: "Please fill in the form with proper data.". You can try modifying the background color of the box as well. &nbsp;</li>
-          <li>Try to use onkeydown -event on the textarea. It should calculate the number of keypresses and output them on the screen. Could you think other smart ways to use it?</li>
-          <li>When the form button is clicked, check if the textarea is empty. Notify the user with appropriate message. HINT: You can access the Textarea using the following command:   <i>document.getElementById("textdata").value</i>. We will study the forms deeper in Workshops 4 and 5.</li>
+          <li><strong>COMPLETE</strong> - Add onfocus -event to the&nbsp;textarea below. When the user enters the textarea, it should show a text saying: "Please fill in the form with proper data.". You can try modifying the background color of the box as well. &nbsp;</li>
+          <li><strong>COMPLETE</strong> - Try to use onkeydown -event on the textarea. It should calculate the number of keypresses and output them on the screen. Could you think other smart ways to use it?</li>
+          <li><strong>COMPLETE</strong> - When the form button is clicked, check if the textarea is empty. Notify the user with appropriate message. HINT: You can access the Textarea using the following command:   <i>document.getElementById("textdata").value</i>. We will study the forms deeper in Workshops 4 and 5.</li>
         </ul>
         <form>
-            <textarea id="textdata"></textarea><br>
+            <textarea id="textdata" onfocus="changeTextarea()" onkeydown="keypressCounter()" onclick="validateEmpty()"></textarea><br>
             <span id="charcount"></span>
             <button>Send me</button>
         </form>
         <hr/>
-        <h2>Exercise 4</h2>
-        <div id="coordinates"></div>
-        <p>Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first outputting to the console using console.log.</p>
-        <p> When the program is working, you can try outputting the text on the H2 element with an id "coords" the box</p> 
+        <h2 id="coords">Exercise 4</h2>
+        <div id="coordinates" onmousemove="mouseEvent(event)"></div>
+        <p><strong>COMPLETE</strong> - Add onMouseMove -event to the DIV-element above. When you move mouse over the DIV (rectangle) the program should output the coordinates of your pointer. Try first outputting to the console using console.log.</p>
+        <p><strong>COMPLETE</strong> - When the program is working, you can try outputting the text on the H2 element with an id "coords" the box</p> 
         <p>HINT: You need to use document.getElementById("coordinates").innerHTML to achieve this.</p>
     </body>
 </html>
