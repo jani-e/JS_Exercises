@@ -27,6 +27,23 @@
 				pTags[3].style.cssText = "background-color: gray";
 				pTags[3].innerHTML += `<br><img src="https://www.multimediaxp.com/images/article_190508124638.1557333998.jpg" style="height: 40px"></img>`;
 			}
+
+			function hide() {
+				var hideElement = document.getElementById("me");
+				hideElement.style.display = "none";
+			}
+
+			function show() {
+				var showElement = document.getElementById("me");
+				showElement.style.display = "block";
+			}
+
+			function change() {
+				var changeClass = document.getElementsByClassName("surprise");
+				for (let index = 0; index < changeClass.length; index++) {
+					changeClass[index].style.fontSize = "20px";
+				}
+			}
 		</script>
 	</head>
 	<body class="ws4">
@@ -65,14 +82,14 @@
 			</label>
 			<br>
 			<label>
-				<input type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
+				<input onchange="change()" type="checkbox" name="CheckboxGroup1" value="3" id="CheckboxGroup1_2"> 
 				<span id="surpise">Surprise</span>
 			</label>
 		</p>
 		<ul>
-		  <li>First checkbox: Find out which element has been described with the id &quot;me&quot;. Change the visibility (display value) of the element to none. What happens?</li>
-		  <li>Second checkbox should return the visibility of the element to a normal state (block).</li>
-		  <li>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
+		  <li><strong>Completed - </strong>First checkbox: Find out which element has been described with the id &quot;me&quot;. Change the visibility (display value) of the element to none. What happens?</li>
+		  <li><strong>Completed - </strong>Second checkbox should return the visibility of the element to a normal state (block).</li>
+		  <li><strong>Completed - </strong>Third checkbox should find the elements with class &quot;surprise&quot; and change the font size to 20.</li>
 		</ul>
 		<div id="me" class="red-box"></div>
 		<p>&nbsp;</p>
