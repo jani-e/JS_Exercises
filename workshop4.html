@@ -44,6 +44,48 @@
 					changeClass[index].style.fontSize = "20px";
 				}
 			}
+
+			function fireUpAlert() {
+				var selectedValue = document.getElementById("mySelect").value;
+				alert(selectedValue);
+			}
+
+			function colorBorderOn() {
+				var carImage = document.getElementById("carimage");
+				carImage.style.border = "10px solid red";
+			}
+			function colorBorderOff() {
+				var carImage = document.getElementById("carimage");
+				carImage.style.border = "0px";
+			}
+
+			function changeImage() {
+				var images = [
+					"https://moottori.fi/wp-content/uploads/2020/06/BMW_M440i_Coupe_2020-3-768x432.jpg",
+					"https://tyyliniekka.fi/wp-content/uploads/2020/01/Audi-scaled-1-1024x682.jpg",
+					"https://www.atoyautohuolto.fi/wp-content/uploads/2018/05/Nettisivut_artikkelikuva_Mercedes-Benz_2_800x500.jpg",
+					"https://www.atoyautohuolto.fi/wp-content/uploads/2018/05/Nettisivut_artikkelikuva_Volvo_800x550.jpg"
+				];
+				var currentValue = document.getElementById("mySelect").value;
+				var currentImage = document.getElementById("carimage");
+				switch (currentValue) {
+					case "BMW":
+						currentImage.src = images[0];
+						break;
+					case "Audi":
+						currentImage.src = images[1];
+						break;
+					case "Mercedes":
+						currentImage.src = images[2];
+						break;
+					case "Volvo":
+						currentImage.src = images[3];
+						break;
+					default:
+						currentImage.src = images[0];
+						break;
+				}
+			}
 		</script>
 	</head>
 	<body class="ws4">
@@ -96,12 +138,12 @@
 		<hr/>
 		<h2>Exercise 3: Images and pulldowns</h2>
 			<ul>
-				<li>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
-				<li>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
-				<li>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
+				<li><strong>Completed - </strong>Write a JavaScript function, which will fire when the pulldown menu item is changed. Show the users choice using alert -box.</li>
+				<li><strong>Completed - </strong>When the mouse is moved on top of the image, a colored border should appear surrounding it. On mouse out, border should disappear</li>
+				<li><strong>Completed - </strong>When you have accomplished the above, change the image (id=&quot;carimage&quot;) below based on the users choice on the pulldown menu below. Find appropriate images from the web.
 			</ul>
 		  <p>Select a new car from the list.</p>
-		  <select name="mySelect" id="mySelect" onchange="">
+		  <select name="mySelect" id="mySelect" onchange="fireUpAlert(), changeImage()">
 			<option value="BMW">BMW         
 			<option value="Audi">Audi
 			<option value="Mercedes">Mercedes
@@ -109,7 +151,7 @@
 		  </select>
 		  <br>
 		  <br>
-		<img alt="" onmouseover="" onmouseout="" style="left: 0px; opacity: 1;" src="http://cdn.bmwblog.com/wp-content/uploads/2015/11/BMW-2-Series-Gran-Coupe-Rendering.jpg" width="400" id="carimage"/>
+		<img alt="" onmouseover="colorBorderOn()" onmouseout="colorBorderOff()" style="left: 0px; opacity: 1;" src="https://moottori.fi/wp-content/uploads/2020/06/BMW_M440i_Coupe_2020-3-768x432.jpg" width="400" id="carimage"/>
 		<hr/>
 		<h2>Exercise 4: Moving things around</h2>
 		<ul>
