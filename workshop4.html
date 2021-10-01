@@ -86,6 +86,68 @@
 						break;
 				}
 			}
+			function changePosition() {
+				var imageCar = document.getElementById("carimage");
+				imageCar.style = "left: 200px; top: 500px";
+			}
+
+			function doMove() {
+				var imageCar = document.getElementById("carimage");
+				var leftPos = parseInt(imageCar.style.left);
+				leftPos += 2;
+				imageCar.style.left = leftPos + "px";
+			}
+
+			function fadeOut() {
+				var imageCarOpacity = document.getElementById("carimage").style.opacity;
+				imageCarOpacity -= 0.1;
+				document.getElementById("carimage").style.opacity = imageCarOpacity;
+			}
+
+			function remove() {
+				var imageCar = document.getElementById("carimage");
+				imageCar.parentNode.removeChild(imageCar);  //notice parentNode
+			}
+
+			function insertRows() {
+				var table = document.getElementById("data");
+				var newTableContent = document.createElement('tr');
+
+				var data1 = "<td>" + document.getElementById("textfield").value + "</td>";
+				var data2 = "<td>" + document.getElementById("textfield2").value + "</td>";
+				var data3 = "<td>" + document.getElementById("textfield3").value + "</td>";
+
+				newTableContent.innerHTML = data1 + data2 + data3;
+
+				//newTableContent.innerHTML = "<td>test1</td>" + "<td>test2</td>" + "<td>test3</td>";
+				table.appendChild(newTableContent);
+				// solutions uses table.insertCell(index) instead of document.createElement
+			}
+			//bonus
+
+			function replaceLoop() {
+				var liTags = document.getElementsByTagName("li");
+				for (let index = 0; index < liTags.length; index++) {
+					const element = liTags[index];
+					const newElement = "<strong>Replaced</strong>"
+					element.innerHTML = newElement;
+					element.style.color = "red";
+				}
+			}
+
+			function replaceSelect() {
+				var liTags = document.getElementsByTagName("li");
+				for (let index = 0; index < liTags.length; index++) {
+					const element = liTags[index];
+					const str = element.innerText;
+					if (str.includes("Select")) {
+						const newElement = "<strong>Replaced</strong>"
+						element.innerHTML = newElement;
+						element.style.color = "red";
+					}
+				}
+			}
+
 		</script>
 	</head>
 	<body class="ws4">
@@ -158,18 +220,18 @@
 		  <li>
 			<p class="surprise">You can do neat things by editing CSS-rules via  JavaScript. See the examples in lecture slides. Then try these:</p>
 			<ol>
-			  <li><button onclick="changePosition()">Move!</button>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
-			  <li><button onclick="setInterval(function(){doMove();},1000); ">Animate</button> Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
-			  <li><button onclick="setInterval(function(){fadeOut();},250);">Fade out!</button> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
-			  <li><button onclick="remove()">Disappear! </button>Finally, write JavaScript which will remove the image from the page</li>
+			  <li><button onclick="changePosition()">Move!</button><strong> Completed - </strong>Select the div with an id &quot;carimage&quot; and move it 200px left and 500px down</li>
+			  <li><button onclick="setInterval(function(){doMove();},1000); ">Animate</button><strong> Completed - </strong>Write a  funtion doMove() which  will move the image across the screen, or even better: back and forth on  the screen. The Interval required has already been added to the onclick -event of the list item.</li>
+			  <li><button onclick="setInterval(function(){fadeOut();},250);">Fade out!</button><strong> Completed - </strong> Wite  a function fadeOut() which will slowly decrease the opacity of the image from 1.0 to  0 making it fade out. The Interval required has already been added to the onclick -event of the list item</li>
+			  <li><button onclick="remove()">Disappear! </button><strong> Completed - </strong>Finally, write JavaScript which will remove the image from the page</li>
 			</ol>
 		  </li>
 		</ul>
 		<hr/>
 		<h2>Exercise 5: Tables</h2>
 		<ul>
-		  <li class="surprise">Write a JavaScript function to  add rows to a table. Rows can contain preset values.</li>
-		  <li>When your code is working, try reading the content to be added from a set of fields below the table.</li>
+		  <li class="surprise"><strong>Completed - </strong>Write a JavaScript function to  add rows to a table. Rows can contain preset values.</li>
+		  <li><strong>Completed - </strong>When your code is working, try reading the content to be added from a set of fields below the table.</li>
 		</ul>
 		<br>
 		<table id="data" class="display">
@@ -227,10 +289,12 @@
 		<h2>Bonus exercises for the enthusiastics</h2>
 		<ul>
 			<li dir="ltr">
-				<p dir="ltr">Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
+				<p dir="ltr"><strong>Completed - </strong>Write a loop, which goes through all the LI tags in the page and replaces them with a &lt;strong&gt; tagged, red text saying &quot;Replaced&quot;.</p>
 			</li>
-			<li dir="ltr">How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li>
+			<li dir="ltr"><strong>Okay-level completed - </strong>How would you replace the contents only on the ones with the word &lsquo;Select&rsquo; in them?</li>
 		</ul>
+		<button onclick="replaceLoop()">Extra1</button>
+		<button onclick="replaceSelect()">Extra2</button>
 	</body>
 </html>
 
