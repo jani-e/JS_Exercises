@@ -4,6 +4,99 @@
 		<meta charset="UTF-8">
 		<title>Workshop 5</title>
         <link rel="stylesheet" href="css/styles.css">
+        <script>
+            function validateForm() {
+                var email = document.forms["formName"]["email"].value;
+                var comment = document.forms["formName"]["comment"].value;
+                if (email.length < 6 || email.length > 15 || !email.includes("@")) {
+                    alert("invalid email");
+                    document.forms["formName"]["email"].style.borderColor = "red";
+                    document.forms["formName"]["email"].select();
+                    document.forms["formName"]["email"].focus();
+                    document.getElementById("feedbackEmail").innerHTML="<b>* Fill in properly</b>"; //option one for adding text to span
+                    return false;
+                }
+                if (comment == null || comment == "") {
+                    alert("Comment can't be empty");
+                    document.forms["formName"]["comment"].style.borderColor = "red";
+                    document.forms["formName"]["comment"].select();
+                    document.forms["formName"]["comment"].focus();
+
+                    var bElement = document.createElement("b"); //option two for adding text to span
+                    var bTextnode = document.createTextNode("* Please fill in properly");
+                    bElement.appendChild(bTextnode);
+                    document.getElementById("feedbackComment").appendChild(bElement);
+
+                    return false;
+                }
+                if (comment.length > 50) {
+                    comment = comment.substr(0, 50);
+                }
+                alert("You submitted:\nEmail: " + email + "\nComment: " + comment);
+            }
+
+            function calculateCost() {
+                var type = document.forms["theForm"]["type"].value;
+                var typeCost = 0.00;
+                switch (type) { //simpler would be to put the int values in form html
+                    case "basic":
+                        typeCost = 10.00;
+                        break;
+                    case "premium":
+                        typeCost = 15.00;
+                        break;
+                    case "gold":
+                        typeCost = 20.00;
+                        break;
+                    case "platinum":
+                        typeCost = 25.00;
+                        break;
+                    default:
+                        break;
+                }
+                var years = document.forms["theForm"]["years"].value;
+                var costValue = typeCost * years;
+                if (years > 5) {
+                    alert("DISCOUNTS!!!");
+                    costValue = costValue * 0.8 - 5;
+                    document.getElementById("alertYearsDiscount").innerHTML="<b>You are eligible for 20% discount + -5€ special discount!</b>";
+                } else if (years > 2) {
+                    costValue = costValue * 0.8;
+                    document.getElementById("alertYearsDiscount").innerHTML="<b>You are eligible for 20% discount!</b>";
+                }
+                costValue = costValue.toFixed(2); //adds two decimals
+                document.getElementById("cost").value = costValue;
+            }
+            //extras
+            function showExtraEmailField() {
+                var value = document.forms.fornName2.emailCheck;
+                var input = document.forms.fornName2.emailText;
+                if (value.checked) {
+                    input.style.display = "inline";
+                } else {
+                    input.style.display = "none";
+                }
+            }
+            function showExtraPhoneField() {
+                var value = document.forms.fornName2.phoneCheck;
+                var input = document.forms.fornName2.phoneText;
+                if (value.checked) {
+                    input.style.display = "inline";
+                } else {
+                    input.style.display = "none";
+                }
+            }
+            function showExtraSmsField() {
+                var value = document.forms.fornName2.smsCheck;
+                var input = document.forms.fornName2.smsText;
+                if (value.checked) {
+                    input.style.display = "inline";
+                } else {
+                    input.style.display = "none";
+                }
+            }
+
+        </script>
     </head>
     <body>
         <h1>Workshop 5: Smart Forms</h1>
@@ -13,13 +106,14 @@
         <hr/>
         <h2>Exercise 1: Contact Form</h2>
         <p data-line="4">Below you see a simple contact form which has fields for email address   and comments.</p>
-        <p data-line="6">a) Write JavaScript code which   checks the input fields when the form submit-button is clicked. Display the   entered values with alert -dialogs. Use onsubmit-event on the form tag. Make sure that your code cancels the submission of the form if needed. Hint: See the PowerPoint -slides.</p>
-        <p data-line="8">b) Enhance the code and write   if-statements to check the following: the length of email address should be atleast 6 and   less than 15. It should also have a  @ - character. Check also that the comment field is not be empty and the content should be trimmed down to 50 characters. Utilize JavaScript <a href="http://www.w3schools.com/js/js_string_methods.asp" target="_blank">String-methods</a>.</p>
-        <p data-line="12">c) Should an error occur,   highlight the erroneous field and provide some feedback to the user.   Preferably by displaying some text message on the page, next to the   input field. See the lecture slides for demo.</p>
-        <form onsubmit="">
+        <p data-line="6"><strong>Completed - </strong>a) Write JavaScript code which   checks the input fields when the form submit-button is clicked. Display the   entered values with alert -dialogs. Use onsubmit-event on the form tag. Make sure that your code cancels the submission of the form if needed. Hint: See the PowerPoint -slides.</p>
+        <p data-line="8"><strong>Completed - </strong>b) Enhance the code and write   if-statements to check the following: the length of email address should be atleast 6 and   less than 15. It should also have a  @ - character. Check also that the comment field is not be empty and the content should be trimmed down to 50 characters. Utilize JavaScript <a href="http://www.w3schools.com/js/js_string_methods.asp" target="_blank">String-methods</a>.</p>
+        <p data-line="12"><strong>Completed - </strong>c) Should an error occur,   highlight the erroneous field and provide some feedback to the user.   Preferably by displaying some text message on the page, next to the   input field. See the lecture slides for demo.</p>
+        <form name="formName" onsubmit="return validateForm()">
             <div class="no-border">
                 <label>Email address:<br>
                     <input type="text" name="email">
+                    <span id="feedbackEmail"></span>
                 </label>
             </div>
             <div class="no-border">
@@ -27,6 +121,7 @@
                     Comment:<br>
                 </label>
                 <textarea name="comment"></textarea>
+                <span id="feedbackComment"></span>
             </div>
             <br>
             <input type="submit" value="Send">
@@ -36,9 +131,9 @@
         <h2>Exercise 2: Membership Calculator</h2>
         <p data-line="16">Below there is a membership calculator form. It has 3 fields: Membership Type (pulldown), Years (input) and Costs (input). User can use the pulldown to   select which plan user wants to choose (Basic = 10€, Premium=15€,   Gold=20€) and then enter the number of years he wants to pay for.</p>
         <p data-line="20">Update the code of the form so that:</p>
-        <p data-line="20">a)  the Costs-field should display the total costs of the subscription</p>
-        <p data-line="22">b) If the user chooses to pay   for more than 2 years, he will get a 20% discount. Notify the user when   he is eligible to get the discount, by showing a text next to form.</p>
-        <p data-line="24">c) Should he pay for 5 years or   more, he will get the normal 20% discount, but will also be given an   extra 5€ discount with a special greetings text on screen.</p>
+        <p data-line="20"><strong>Completed - </strong>a)  the Costs-field should display the total costs of the subscription</p>
+        <p data-line="22"><strong>Completed - </strong>b) If the user chooses to pay   for more than 2 years, he will get a 20% discount. Notify the user when   he is eligible to get the discount, by showing a text next to form.</p>
+        <p data-line="24"><strong>Completed - </strong>c) Should he pay for 5 years or   more, he will get the normal 20% discount, but will also be given an   extra 5€ discount with a special greetings text on screen.</p>
         <form action="#" method="post" id="theForm">
             <fieldset>
                 <legend>Create Your Membership</legend>
@@ -55,12 +150,13 @@
                 <div>
                     <label for="years">Years</label>
                     <input type="number" name="years" id="years" min="1" required>
+                    <span id="alertYearsDiscount"></span>
                 </div>
                 <div>
                     <label for="cost">Cost</label>
                     <input type="text" name="cost" id="cost" disabled>
                 </div>
-                <input type="submit" value="Calculate" id="submit">
+                <input onclick="calculateCost()" type="submit" value="Calculate" id="submit">
           </fieldset>
         </form>
             
@@ -69,9 +165,9 @@
         <h2>Exercise 3: Book Order</h2>
         <p data-line="27">In many cases, developer has to maintain and develop code written by someone else. Look at the HTML code and JavaScript code below. Study how does it work and what is the logic behind it.</p>
         <p data-line="29">Then add following features to the code:</p>
-        <p data-line="31">a) the values read from the text   boxes are stored as strings. Modify the code to store the quantity as an integer and the price, tax and discount as floats.</p>
-        <p data-line="33">b) modify the JS code to double the discount applied when the quantity ordered is greater than 100 items</p>
-        <p data-line="35">c) modify the HTML form to include a shipping field, and include this value in the total calculation in shopping.js.</p>
+        <p data-line="31"><strong>Completed - </strong>a) the values read from the text   boxes are stored as strings. Modify the code to store the quantity as an integer and the price, tax and discount as floats.</p>
+        <p data-line="33"><strong>Completed - </strong>b) modify the JS code to double the discount applied when the quantity ordered is greater than 100 items</p>
+        <p data-line="35"><strong>Completed - </strong>c) modify the HTML form to include a shipping field, and include this value in the total calculation in shopping.js.</p>
         <p>&nbsp;</p>
         <fieldset>
             <p>Calculate a bulk book order.</p>
@@ -92,6 +188,10 @@
                 <input type="text" name="discount" id="discount" value="0.00" required>
             </div>
             <div>
+                <label for="Shipping">Shipping</label>
+                <input type="text" name="shipping" id="shipping" value="0.00" required>
+            </div>
+            <div>
                 <label for="total">Total</label>
                 <input type="text" name="total" id="total" value="0.00">
             </div>
@@ -104,10 +204,44 @@
         <h2>Exercise 4: Hidden Extra fields</h2>
         <ul>
             <li>In PowerPoint-slides you were   shown a demo of a form where some extra fields were hidden and they turned visible after certain events occurred.
-                <p data-line="41">Copy the the contact form   created in Exercise 1 and edit it. Add select boxes to the form where user   can choose a preferred way of contact. There should be atleast email and   phone and sms available. </p>
-                <p data-line="41">After choosing the box, the user is shown an   input field which asks detailed information regarding on the selected   contact method.</p>
+                <p data-line="41"><strong>Completed - </strong>Copy the the contact form   created in Exercise 1 and edit it. Add select boxes to the form where user   can choose a preferred way of contact. There should be atleast email and   phone and sms available. </p>
+                <p data-line="41"><strong>Completed - </strong>After choosing the box, the user is shown an   input field which asks detailed information regarding on the selected   contact method.</p>
           </li>
         </ul>
+        <form name="formName2" id="fornName2" onsubmit=""> <!--validation off because the form is a copy of previous one-->
+            <span>Notice: Validation off, just practising check buttons</span>
+            <br>
+            <br>
+            <div class="no-border">
+                <label>Email address:<br>
+                    <input type="text" name="email">
+                    <span id="feedbackEmail"></span>
+                </label>
+            </div>
+            <div class="no-border">
+                <label>
+                    Comment:<br>
+                </label>
+                <textarea name="comment"></textarea>
+                <span id="feedbackComment"></span>
+            </div>
+            <div>
+                <label>
+                    Contact me by:
+                </label>
+                <br>
+                <input type="checkbox" name="emailCheck" id="emailCheck" onclick="showExtraEmailField()">Email
+                <input type=text" name="emailText" id="emailText" class="extraHidden" style="display:none">
+                <br>
+                <input type="checkbox" name="phoneCheck" id="phoneCheck"onclick="showExtraPhoneField()">Phone
+                <input type=text" name="phoneText" id="phoneText" class="extraHidden" style="display:none">
+                <br>
+                <input type="checkbox" name="smsCheck" id="smsCheck"onclick="showExtraSmsField()">SMS
+                <input type=text" name="smsText" id="smsText" class="extraHidden" style="display:none">
+            </div>
+            <br>
+            <input type="submit" value="Send">
+        </form>
         <script src="js/shopping.js"></script>
     </body>
 </html>
