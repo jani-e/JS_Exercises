@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/styles.css">
 	</head>
-	<body class="ws6" onload="">
+	<body class="ws6" onload="loadStorage()">
 		<h1>Workshop 6: Using Localstorage</h1>
 		<hr />
 		<h2>Exercise 1: Saving the entered data</h2>
@@ -60,5 +60,30 @@
 			example, would remember the data that you have entered between browser refresh and even 
 			restarts.</p>
 		</div>
+		<script>
+			//Exercise 1
+			function getData() {
+				var destination = document.getElementById("destination").value;
+				var arrivalDate = document.getElementById("arrival").value;
+				var checkboxArray = document.getElementsByName("CheckboxGroup1");
+				var checkboxObject = {
+					internet: checkboxArray[0].checked,
+					AC: checkboxArray[1].checked,
+					minibar: checkboxArray[2].checked,
+					car: checkboxArray[3].checked,
+					sauna: checkboxArray[4].checked,
+				};
+				var array = [destination,arrivalDate,checkboxObject]
+				var JSONarray = JSON.stringify(array);
+				localStorage.setItem("reservation", JSONarray);
+			}
+			//Exercise 2
+			function loadStorage() {
+				var data = localStorage.getItem("reservation");
+				var parsedData = JSON.parse(data, "", " ");
+				var location = document.getElementById("sessiondata");
+				location.innerHTML = parsedData; //shows as object Object on website
+			}
+		</script>
 	</body>
 </html>
