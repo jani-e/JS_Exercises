@@ -82,7 +82,15 @@
 				var data = localStorage.getItem("reservation");
 				var parsedData = JSON.parse(data, "", " ");
 				var location = document.getElementById("sessiondata");
-				location.innerHTML = parsedData; //shows as object Object on website
+				var toPrint = 
+					"Destination: " + parsedData[0] + "<br>"
+					+ "Arrival Date: " + parsedData[1] + "<br>"
+					+ "Internet: " + parsedData[2]["internet"] + "<br>"
+					+ "Air Conditioning: " + parsedData[2]["AC"] + "<br>"
+					+ "Minibar: " + parsedData[2]["minibar"] + "<br>"
+					+ "Car rent: " + parsedData[2]["car"] + "<br>"
+					+ "Sauna: " + parsedData[2]["sauna"];
+				location.innerHTML = toPrint;
 			}
 		</script>
 	</body>
