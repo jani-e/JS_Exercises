@@ -16,7 +16,7 @@
         <p>If you get "Blocked loading mixed active content" error, please check whether you're using http or https for your http requests. More info on this in <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content" target="_blank">https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content</a></p>
 		<hr/>
 		<h2>Exercise 1: Parsing XML data </h2>
-		<p>This page has XML data embedded into it. See page source, line 78. The browser cannot display it properly, but it's there. Below you can also see the structure data.</p>
+		<p>This page has XML data embedded into it. See page source, line 38. The browser cannot display it properly, but it's there. Below you can also see the structure data.</p>
 		<p>Write a function called parseData(), which will output the quote and author tags from XML when button is clicked.
 		Hint: Use document.getElementsByTagName() function. See PowerPoint for reference.</p>
 
@@ -117,5 +117,27 @@
 		<input type="button" name="Fetch3" id="Fetch3c" value="Load Iltalehti Newsfeed" onclick="loadAndParseNews('http://www.iltalehti.fi/rss/uutiset.xml')">
 		<div id="newsfeed">
 		</div>
+		<script>
+			//Exercise 1
+			function parseData() {
+				var quotes = document.getElementsByTagName('quote');
+				var authors = document.getElementsByTagName('author');
+
+				for (let index = 0; index < quotes.length; index++) {
+					console.log("Quote: " + quotes[index].innerHTML + "\nAuthor: " + authors[index].innerHTML);
+				}
+			}
+			//Exercise 2
+			function loadXMLFile() {
+				var xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("GET", "http://quotes.rest/qod.xml", true);
+				xmlhttp.send();
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						document.getElementById('quotes').innerHTML = xmlhttp.responseText;
+					}
+				}
+			}
+		</script>
 	</body>
 </html>
