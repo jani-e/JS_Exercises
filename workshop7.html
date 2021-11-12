@@ -138,8 +138,8 @@
 		<li><a href="#">News heading 3</a></li>
 	</ul>
 	<input type="button" name="Fetch3" id="Fetch3b" value="Load YAHOO newsfeed"
-		onclick="loadAndParseNews('https://www.yahoo.com/news/rss/')">
-	<input type="button" name="Fetch3" id="Fetch3c" value="Load Iltalehti Newsfeed"
+		onclick="loadAndParseNews('https://meijastiina.github.io/news_rss_topstories.xml')">
+	<input type="button" name="Fetch3" id="Fetch3c" value="Load Iltalehti Newsfeed [CORS policy]"
 		onclick="loadAndParseNews('http://www.iltalehti.fi/rss/uutiset.xml')">
 	<div id="newsfeed">
 	</div>
@@ -180,6 +180,28 @@
 						let tableRow = table.insertRow(2 + index);
 						let quoteCell = tableRow.insertCell(0).innerHTML = quotes[index].innerHTML;
 						let authorCell = tableRow.insertCell(1).innerHTML = authors[index].innerHTML;
+					}
+				}
+			}
+		}
+		//Exercise 4
+		function loadAndParseNews(url) {
+			let target = document.getElementById('newsfeed');
+			let ul = document.createElement('ul');
+			target.appendChild(ul);
+			let xmlhttp = new XMLHttpRequest();
+			xmlhttp.open('GET', url, true);
+			xmlhttp.send();
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+					let loadedxml = xmlhttp.responseXML;
+					let items = loadedxml.getElementsByTagName('item');
+					for (let index = 0; index < items.length; index++) {
+						let li = document.createElement('li');
+						let link = items[index].getElementsByTagName('link').item(0).firstChild.nodeValue;
+						let title = items[index].getElementsByTagName('title').item(0).firstChild.nodeValue;
+						li.innerHTML = '<a href="' + link + '">' + title + '</a>';
+						ul.appendChild(li);
 					}
 				}
 			}
