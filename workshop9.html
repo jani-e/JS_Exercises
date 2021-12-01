@@ -19,9 +19,8 @@
                 left:0px;
             }
         </style>
-        <script>
-            <!-- JavaScript goes here -->
-        </script>
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="crossorigin="anonymous"></script>
+       
     </head>
     <body>
         <h1>Workshop 9: Using jQuery</h1><hr />
@@ -43,11 +42,19 @@
         <p>How would you:</p>
         <ol>
           <li>Find a reference to all H3 -tags?</li>
-          <li>Find a reference to div with an id='contant' and replace the contents with a text of your choice else?</li>
+          <p>$("h3")</p>
+          <li id="contant">Find a reference to div with an id='contant' and replace the contents with a text of your choice else?</li>
+          <p>$("#contant").html("mytext");</p>
           <li>Find a reference to the img and replace the src attribute with some other image online?</li>
-          <li>Find the element with a class sideBarListBox and show/hide it?</li>
+          <img style="width: 40px" src="https://www.html5rocks.com/static/images/tutorials/easy-hidpi/chrome1x.png">
+          <p>$("img").attr("src","https://www.html5rocks.com/static/images/tutorials/easy-hidpi/tile.jpg");</p>
+          <li class="sideBarListBox">Find the element with a class sideBarListBox and show/hide it?</li>
+          <p>$(".sideBarListBox").hide();</p>
+          <p>$(".sideBarListBox").show();</p>
           <li>Find any li element that contains the text &quot;Lorem&quot; and add css underline -attribute to them?</li>
-          <li>Find all the anchor tags within the class SideBarListBox and apply css modifications of your choice to them.</li>
+          <p>$('li:contains("Lorem")').css('text-decoration', 'underline');</p>
+          <li class="sideBarListBox">Find all the anchor tags within the class SideBarListBox and apply css modifications of your choice to them.</li>
+          <p>$('.sideBarListBox').css('color', 'red');</p>
         </ol>
         <hr/>
         <h2>Exercise 3: Effects and animation</h2>
@@ -60,6 +67,7 @@
             <input type="button" name="button4" id="button4" value="SlideDown main contents">
             <input type="button" name="button5" id="button5" value="Animate">
         </p>
+        
         <ol>
             <li>Fade in the main heading of the page</li>
             <li>Fade out the main heading of the page</li>
@@ -67,10 +75,32 @@
             <li>SlideDown the main contents of the page</li>
             <li>Study the animate() -function. Write an animation sequence of your own on the page</li>
         </ol>
+        <script>
+            $('#button').click(function() {
+                $('h2').fadeIn();
+            });
+            $("#button2").click(function() {
+                $('h2').fadeOut();
+            });
+            $("#button3").click(function() {
+                $('li').slideUp();
+            });
+            $("#button4").click(function() {
+                $('li').slideDown();
+            });
+            $("#button5").click(function() {
+                $('li').animate({
+                    width: "70%",
+                    opacity: 0.4,
+                    marginLeft: "0.6in"
+                }, 1500 );
+                });
+        </script>
         <hr/>
         <h2>Exercise 4: Ajax</h2>
         <ol>
             <li>First try Ajax with console. Use load() -function to inject content from the web (ex. <a href="https://meijastiina.github.io/news_rss_topstories.xml" target="_blank">https://meijastiina.github.io/news_rss_topstories.xml</a>) into the div below.</li>
+            <p>$('#ajax').load("https://meijastiina.github.io/news_rss_topstories.xml");</p>
             <li>Then write a JavaScript function, which will fire when the pulldown menu item is changed. Each selection loads a different content from web to the div below. </li>
             <li>Change the pulldown item names accordingly as well.</li>
         </ol>
@@ -84,5 +114,22 @@
         </p>
         <div id="ajax" style="border: 1px solid black; width: 400px;">
         </div>
+        <script>
+            $('#mySelect').change(function() {
+                switch (this.value) {
+                    case "first": console.log("first");
+                        $('#ajax').load('https://meijastiina.github.io/news_rss_topstories.xml');
+                        break;
+                    case "second": console.log("second");
+                        $('#ajax').load('https://meijastiina.github.io/ajax_example.txt');
+                        break;
+                    case "third": console.log("third");
+                        $('#ajax').text("not found");
+                        break;
+                    default:
+                        break;
+                }
+            })
+        </script>
     </body>
 </html>
